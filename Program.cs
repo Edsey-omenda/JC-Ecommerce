@@ -50,6 +50,7 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("JCEcommerceConne
 //Add Repositories
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 
 builder.Services.AddControllers();
