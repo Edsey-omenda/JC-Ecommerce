@@ -30,7 +30,11 @@ namespace JC_Ecommerce.Controllers
 
             if (existingUser != null)
             {
-                return BadRequest("Email Already Exists!");
+                return BadRequest(new
+                {
+                    success = false,
+                    message = "Email Already Exists!"
+                });
             }
 
             var newUser = new User
@@ -42,7 +46,12 @@ namespace JC_Ecommerce.Controllers
 
             await userRepository.RegisterAsync(newUser, registerRequestDTO.Password, registerRequestDTO.Roles);
 
-            return Ok("Registration Succesful. Please Login!");
+            return Ok(new
+            {
+                success = true,
+                message = "Registration successful. Please login!"
+            });
+
         }
 
 
@@ -99,7 +108,12 @@ namespace JC_Ecommerce.Controllers
 
             Console.WriteLine(success);
 
-            return Ok("Reset token has been sent to your email.");
+            return Ok(new
+            {
+                success = true,
+                message = "Reset token has been sent to your email."
+            });
+
         }
 
         //Reset Password
@@ -117,7 +131,12 @@ namespace JC_Ecommerce.Controllers
 
             Console.WriteLine(success);
 
-            return Ok("Password has been reset successfully. You can now log in.");
+            return Ok(new
+            {
+                success = true,
+                message = "Password has been reset successfully. You can now log in."
+            });
+
         }
     }
 }
