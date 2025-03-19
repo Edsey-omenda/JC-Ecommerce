@@ -18,9 +18,11 @@ namespace JC_Ecommerce.Repositories
         public string CreateJWTToken(User user, List<string> roles)
         {
             //Create Claims
-            var claims = new List<Claim>();
-
-            claims.Add(new Claim(ClaimTypes.Email, user.Email));
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim("UserId", user.UserId.ToString())
+            };
 
             foreach (var role in roles)
             {
