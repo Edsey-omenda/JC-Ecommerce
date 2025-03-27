@@ -2,6 +2,7 @@
 using JC_Ecommerce.Models.Domain;
 using JC_Ecommerce.Models.DTOs;
 using JC_Ecommerce.Repositories;
+using JC_Ecommerce.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,11 +14,13 @@ namespace JC_Ecommerce.Controllers
     {
         private readonly IUserRepository userRepository;
         private readonly ITokenRepository tokenRepository;
+        private readonly IEmailService emailService;
 
-        public AuthController(IUserRepository userRepository, ITokenRepository tokenRepository)
+        public AuthController(IUserRepository userRepository, ITokenRepository tokenRepository, IEmailService emailService)
         {
             this.userRepository = userRepository;
             this.tokenRepository = tokenRepository;
+            this.emailService = emailService;
         }
 
         //Registering/Creating a user
@@ -96,8 +99,30 @@ namespace JC_Ecommerce.Controllers
         //POST: api/Auth/forgot-password
         [HttpPost]
         [Route("forgot-password")]
-
         public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordRequestDTO forgotPasswordRequestDTO)
+        {
+            // 1) Generate token
+            var token = await userRepository.GenerateResetTokenAsync(forgotPasswordRequestDTO.Email);
+
+            if (token == null)
+            {
+                return BadRequest("Email Not Found!");
+            }
+
+            // 2) Send token to user's email
+            var subject = "Your JC Ecommerce Reset Token";
+            var body = $"<p>Use this token to reset your password: <strong>{token}</strong></p>";
+
+            await emailService.SendEmailAsync(forgotPasswordRequestDTO.Email, subject, body);
+
+            return Ok(new
+            {
+                success = true,
+                message = "Reset token has been sent to your email."
+            });
+        }
+
+        /*public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordRequestDTO forgotPasswordRequestDTO)
         {
             var success = await userRepository.GenerateResetTokenAsync(forgotPasswordRequestDTO.Email);
 
@@ -114,7 +139,36 @@ namespace JC_Ecommerce.Controllers
                 message = "Reset token has been sent to your email."
             });
 
+        }*/
+
+
+        // Verify Reset Password Token
+        // POST: api/Auth/verify-token
+        [HttpPost]
+        [Route("verify-token")]
+        public async Task<IActionResult> VerifyToken([FromBody] VerifyResetTokenRequestDTO verifyTokenRequestDTO)
+        {
+            var isValid = await userRepository.ValidateResetTokenAsync(
+                verifyTokenRequestDTO.Email,
+                verifyTokenRequestDTO.Token
+            );
+
+            if (!isValid)
+            {
+                return BadRequest(new
+                {
+                    success = false,
+                    message = "Invalid or expired token."
+                });
+            }
+
+            return Ok(new
+            {
+                success = true,
+                message = "Token is valid."
+            });
         }
+
 
         //Reset Password
         //POST: api/Auth/reset-password

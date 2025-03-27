@@ -15,7 +15,23 @@ namespace JC_Ecommerce.Repositories
             this.jCEcommerceDbContext = jCEcommerceDbContext;
         }
 
-        public async Task<bool> GenerateResetTokenAsync(string email)
+        public async Task<string?> GenerateResetTokenAsync(string email)
+        {
+            var user = await jCEcommerceDbContext.Users.FirstOrDefaultAsync(u => u.Email == email.ToLower());
+            if (user == null) return null;
+
+            var token = Path.GetRandomFileName().Replace(".", "").Substring(0, 6).ToUpper();
+            user.ResetToken = token;
+            user.ResetTokenExpires = DateTime.UtcNow.AddMinutes(30);
+
+            await jCEcommerceDbContext.SaveChangesAsync();
+            Console.WriteLine($"Reset Token for {email}: {user.ResetToken}");
+
+            return user.ResetToken;
+        }
+
+
+        /*public async Task<bool> GenerateResetTokenAsync(string email)
         {
             var user = await jCEcommerceDbContext.Users.FirstOrDefaultAsync(u => u.Email == email.ToLower());
 
@@ -33,7 +49,7 @@ namespace JC_Ecommerce.Repositories
             Console.WriteLine($"Reset Token for Email: ${email}: ${user.ResetToken}");
 
             return true;
-        }
+        }*/
 
         public async Task<bool> ResetPasswordAsync(string email, string token, string newPassword)
         {
@@ -107,6 +123,19 @@ namespace JC_Ecommerce.Repositories
 
             await jCEcommerceDbContext.SaveChangesAsync();
             return user;
+        }
+
+        public async Task<bool> ValidateResetTokenAsync(string email, string token)
+        {
+            var user = await jCEcommerceDbContext.Users
+                .FirstOrDefaultAsync(u => u.Email == email);
+
+            if (user == null || user.ResetToken != token || user.ResetTokenExpires < DateTime.UtcNow)
+            {
+                return false;
+            }
+
+            return true;
         }
 
     }

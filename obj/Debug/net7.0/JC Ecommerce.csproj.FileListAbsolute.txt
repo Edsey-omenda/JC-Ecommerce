@@ -7,9 +7,18 @@ E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\JC Ecommerce.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\JC Ecommerce.pdb
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Azure.Core.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Azure.Identity.dll
+E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\BCrypt.Net-Next.dll
+E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\BouncyCastle.Cryptography.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Humanizer.dll
+E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\MailKit.dll
+E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.Bcl.AsyncInterfaces.dll
+E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.Bcl.Memory.dll
+E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.Bcl.TimeProvider.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.Data.SqlClient.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
@@ -17,6 +26,9 @@ E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.SqlServer.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
+E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.Extensions.Identity.Core.dll
+E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.Extensions.Identity.Stores.dll
+E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.Identity.Client.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.Identity.Client.Extensions.Msal.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
@@ -28,6 +40,7 @@ E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.OpenApi.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.SqlServer.Server.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.Win32.SystemEvents.dll
+E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\MimeKit.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Mono.TextTemplating.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
@@ -35,11 +48,14 @@ E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\System.CodeDom.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\System.Configuration.ConfigurationManager.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\System.Drawing.Common.dll
+E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\System.Formats.Asn1.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\System.Memory.Data.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\System.Runtime.Caching.dll
+E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\System.Security.Cryptography.Pkcs.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\System.Security.Cryptography.ProtectedData.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\System.Security.Permissions.dll
+E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\System.Text.Encoding.CodePages.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\System.Windows.Extensions.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
@@ -51,7 +67,9 @@ E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\runtimes\win\lib\net6.0\Micros
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Security.Cryptography.Pkcs.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Text.Encoding.CodePages.dll
 E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\JC Ecommerce.csproj.AssemblyReference.cache
 E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\JC Ecommerce.GeneratedMSBuildEditorConfig.editorconfig
@@ -60,27 +78,17 @@ E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\JC Ecommerce.AssemblyInfo.cs
 E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\JC Ecommerce.csproj.CoreCompileInputs.cache
 E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\JC Ecommerce.MvcApplicationPartsAssemblyInfo.cs
 E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\JC Ecommerce.MvcApplicationPartsAssemblyInfo.cache
-E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\staticwebassets.build.json
-E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\staticwebassets.development.json
 E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\staticwebassets\msbuild.JC Ecommerce.Microsoft.AspNetCore.StaticWebAssets.props
 E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\staticwebassets\msbuild.build.JC Ecommerce.props
 E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.JC Ecommerce.props
 E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.JC Ecommerce.props
 E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\staticwebassets.pack.json
+E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\staticwebassets.build.json
+E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\staticwebassets.development.json
 E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\scopedcss\bundle\JC Ecommerce.styles.css
+E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\JC Ecommerce.csproj.CopyComplete
 E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\JC Ecommerce.dll
 E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\refint\JC Ecommerce.dll
 E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\JC Ecommerce.pdb
 E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\JC Ecommerce.genruntimeconfig.cache
 E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\ref\JC Ecommerce.dll
-E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\BCrypt.Net-Next.dll
-E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
-E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.Internal.dll
-E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
-E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
-E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.Bcl.Memory.dll
-E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.Bcl.TimeProvider.dll
-E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.Extensions.Identity.Core.dll
-E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.Extensions.Identity.Stores.dll
-E:\ReactApisProject\JC Ecommerce\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
-E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\JC Ecommerce.csproj.CopyComplete
