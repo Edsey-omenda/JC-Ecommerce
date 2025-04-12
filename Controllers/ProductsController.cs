@@ -26,20 +26,35 @@ namespace JC_Ecommerce.Controllers
             [FromQuery] string? filterQuery,
             [FromQuery] string? sortBy,
             [FromQuery] bool isAscending = true,
-            [FromQuery] int pageNumber = 1,
+            [FromQuery] int pageIndex = 1,
             [FromQuery] int pageSize = 10)
         {
-            var products = await productRepository.GetAllAsync(filterOn, filterQuery, sortBy, isAscending, pageNumber, pageSize);
+            var pagedResult = await productRepository.GetAllAsync(
+                filterOn, filterQuery, sortBy, isAscending, pageIndex, pageSize
+            );
 
-            var response = products.Select(p => new ProductResponseDTO
+            var response = new PagedResult<ProductResponseDTO>
             {
-                ProductId = p.ProductId,
-                Name = p.Name,
-                Description = p.Description,
-                Price = p.Price,
-                ImageUrl = p.ImageUrl,
-                Category = p.Category
-            });
+                Items = pagedResult.Items.Select(p => new ProductResponseDTO
+                {
+                    ProductId = p.ProductId,
+                    Name = p.Name,
+                    Description = p.Description,
+                    Price = p.Price,
+                    ImageUrl = p.ImageUrl,
+                    Category = p.Category,
+                    Color = p.Color,
+                    Size = p.Size
+                }).ToList(),
+                TotalItems = pagedResult.TotalItems,
+                FilteredItems = pagedResult.FilteredItems,
+                PageIndex = pagedResult.PageIndex,
+                PageSize = pagedResult.PageSize,
+                TotalPages = pagedResult.TotalPages,
+                BeginIndex = pagedResult.BeginIndex,
+                EndIndex = pagedResult.EndIndex,
+                ReturnedItems = pagedResult.ReturnedItems
+            };
 
             return Ok(response);
         }
@@ -64,7 +79,9 @@ namespace JC_Ecommerce.Controllers
                 Description = product.Description,
                 Price = product.Price,
                 ImageUrl = product.ImageUrl,
-                Category = product.Category
+                Category = product.Category,
+                Color = product.Color,
+                Size = product.Size
             };
 
             return Ok(response);
@@ -86,7 +103,9 @@ namespace JC_Ecommerce.Controllers
                 Stock = productCreateDTO.Stock,
                 ImageUrl = productCreateDTO.ImageUrl,
                 Category = productCreateDTO.Category,
-                CreatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.UtcNow,
+                Color = productCreateDTO.Color,
+                Size = productCreateDTO.Size
             };
 
             await productRepository.CreateAsync(newProduct);

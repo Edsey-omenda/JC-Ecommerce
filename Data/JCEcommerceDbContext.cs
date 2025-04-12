@@ -80,6 +80,20 @@ namespace JC_Ecommerce.Data
                 .Property(o => o.TotalAmount)
                 .HasPrecision(18, 2);
 
+            modelBuilder.Entity<Product>()
+              .Property(p => p.Color)
+              .HasConversion(
+                  v => string.Join(',', v),
+                  v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList()
+              );
+
+            modelBuilder.Entity<Product>()
+                .Property(p => p.Size)
+                .HasConversion(
+                    v => string.Join(',', v),
+                    v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList()
+                );
+
             //Seed data for Order Status
             //Easy, Medium, Hard
 

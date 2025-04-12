@@ -10,6 +10,9 @@
         public string? ImageUrl { get; set; }
         public string Category { get; set; }
         public DateTime CreatedAt { get; set; }
+        // New properties
+        public List<string> Color { get; set; } = new List<string>();
+        public List<string> Size { get; set; } = new List<string>();
 
         //Navigation Properties
         public ICollection<OrderItem> OrderItems { get; set; }

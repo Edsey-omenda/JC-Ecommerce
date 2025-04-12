@@ -8,5 +8,8 @@
         public int Stock { get; set; }
         public string? ImageUrl { get; set; }
         public string Category { get; set; }
+        public List<string> Color { get; set; }
+        public List<string> Size { get; set; }
+
     }
 }

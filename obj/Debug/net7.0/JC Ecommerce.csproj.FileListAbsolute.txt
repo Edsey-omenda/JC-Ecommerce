@@ -86,9 +86,9 @@ E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\staticwebassets.pack.json
 E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\staticwebassets.build.json
 E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\staticwebassets.development.json
 E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\scopedcss\bundle\JC Ecommerce.styles.css
-E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\JC Ecommerce.csproj.CopyComplete
 E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\JC Ecommerce.dll
 E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\refint\JC Ecommerce.dll
 E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\JC Ecommerce.pdb
 E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\JC Ecommerce.genruntimeconfig.cache
 E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\ref\JC Ecommerce.dll
+E:\ReactApisProject\JC Ecommerce\obj\Debug\net7.0\JC Ecommerce.csproj.CopyComplete

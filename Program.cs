@@ -14,10 +14,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add CORS policy
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowLocalhost3000",
+    options.AddPolicy("AllowLocalhost5173",
         builder =>
         {
-            builder.WithOrigins("http://localhost:3000")
+            builder.WithOrigins("http://localhost:5173", "https://localhost:5173")
                    .AllowAnyHeader()
                    .AllowAnyMethod()
                    .AllowCredentials();
@@ -108,7 +108,7 @@ app.UseHttpsRedirection();
 
 
 // Use CORS
-app.UseCors("AllowLocalhost3000");
+app.UseCors("AllowLocalhost5173");
 
 app.UseAuthentication();
 
