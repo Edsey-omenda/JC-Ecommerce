@@ -22,24 +22,45 @@ namespace JC_Ecommerce.Controllers
         //GET: api/Orders/
         [HttpGet("all-orders")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> GetAllOrders()
+        public async Task<IActionResult> GetAllOrders(
+            [FromQuery] string? filterOn,
+            [FromQuery] string? filterQuery,
+            [FromQuery] string? sortBy,
+            [FromQuery] bool isAscending = true,
+            [FromQuery] int pageIndex = 1,
+            [FromQuery] int pageSize = 10
+            )
         {
-            var orders = await orderRepository.GetAllOrdersAsync();
+            var pagedResult = await orderRepository.GetAllOrdersAsync(
+                filterOn, filterQuery, sortBy, isAscending, pageIndex, pageSize
+            );
 
-            var response = orders.Select(order => new OrderResponseDTO
+            var response = new PagedResult<OrderResponseDTO>
             {
-                OrderId = order.OrderId,
-                Status = order.Status?.Name ?? "Pending",
-                OrderDate = order.OrderDate,
-                TotalAmount = order.TotalAmount,
-                Items = order.OrderItems.Select(oi => new OrderItemResponseDTO
+                Items = pagedResult.Items.Select(order => new OrderResponseDTO
                 {
-                    ProductId = oi.ProductId,
-                    ProductName = oi.Product?.Name ?? "Unknown",
-                    Quantity = oi.Quantity,
-                    Price = oi.Price
-                }).ToList()
-            }).ToList();
+                    OrderId = order.OrderId,
+                    Status = order.Status?.Name ?? "Pending",
+                    OrderDate = order.OrderDate,
+                    TotalAmount = order.TotalAmount,
+                    CustomerName = order.User?.FullName ?? "Unknown",
+                    Items = order.OrderItems.Select(oi => new OrderItemResponseDTO
+                    {
+                        ProductId = oi.ProductId,
+                        ProductName = oi.Product?.Name ?? "Unknown",
+                        Quantity = oi.Quantity,
+                        Price = oi.Price
+                    }).ToList()
+                }).ToList(),
+                TotalItems = pagedResult.TotalItems,
+                FilteredItems = pagedResult.FilteredItems,
+                PageIndex = pagedResult.PageIndex,
+                PageSize = pagedResult.PageSize,
+                TotalPages = pagedResult.TotalPages,
+                BeginIndex = pagedResult.BeginIndex,
+                EndIndex = pagedResult.EndIndex,
+                ReturnedItems = pagedResult.ReturnedItems
+            };
 
             return Ok(response);
         }
@@ -48,7 +69,14 @@ namespace JC_Ecommerce.Controllers
         //GET: api/Orders/my
         [HttpGet("my-orders")]
         [Authorize(Roles = "Customer,Admin")]
-        public async Task<IActionResult> GetMyOrders()
+        public async Task<IActionResult> GetMyOrders(
+            [FromQuery] string? filterOn,
+            [FromQuery] string? filterQuery,
+            [FromQuery] string? sortBy,
+            [FromQuery] bool isAscending = true,
+            [FromQuery] int pageIndex = 1,
+            [FromQuery] int pageSize = 10
+            )
         {
             var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
 
@@ -57,22 +85,36 @@ namespace JC_Ecommerce.Controllers
                 return Unauthorized();
             }
 
-            var orders = await orderRepository.GetOrdersByUserIdAsync(Guid.Parse(userIdClaim));
+            var pagedResult = await orderRepository.GetOrdersByUserIdAsync(Guid.Parse(userIdClaim),
+                filterOn, filterQuery, sortBy, isAscending, pageIndex, pageSize
+            );
 
-            var response = orders.Select(order => new OrderResponseDTO
+            var response = new PagedResult<OrderResponseDTO>
             {
-                OrderId = order.OrderId,
-                Status = order.Status?.Name ?? "Pending",
-                OrderDate = order.OrderDate,
-                TotalAmount = order.TotalAmount,
-                Items = order.OrderItems.Select(oi => new OrderItemResponseDTO
+                Items = pagedResult.Items.Select(order => new OrderResponseDTO
                 {
-                    ProductId = oi.ProductId,
-                    ProductName = oi.Product?.Name ?? "Unknown",
-                    Quantity = oi.Quantity,
-                    Price = oi.Price
-                }).ToList()
-            }).ToList();
+                    OrderId = order.OrderId,
+                    Status = order.Status?.Name ?? "Pending",
+                    OrderDate = order.OrderDate,
+                    TotalAmount = order.TotalAmount,
+                    CustomerName = order.User?.FullName ?? "Unknown",
+                    Items = order.OrderItems.Select(oi => new OrderItemResponseDTO
+                    {
+                        ProductId = oi.ProductId,
+                        ProductName = oi.Product?.Name ?? "Unknown",
+                        Quantity = oi.Quantity,
+                        Price = oi.Price
+                    }).ToList()
+                }).ToList(),
+                TotalItems = pagedResult.TotalItems,
+                FilteredItems = pagedResult.FilteredItems,
+                PageIndex = pagedResult.PageIndex,
+                PageSize = pagedResult.PageSize,
+                TotalPages = pagedResult.TotalPages,
+                BeginIndex = pagedResult.BeginIndex,
+                EndIndex = pagedResult.EndIndex,
+                ReturnedItems = pagedResult.ReturnedItems
+            };
 
             return Ok(response);
         }

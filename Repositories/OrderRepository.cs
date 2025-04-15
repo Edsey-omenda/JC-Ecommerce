@@ -70,12 +70,57 @@ namespace JC_Ecommerce.Repositories
 
         }
 
-        public async Task<List<Order>> GetAllOrdersAsync()
+        public async Task<PagedResult<Order>> GetAllOrdersAsync(string? filterOn = null, string? filterQuery = null,
+            string? sortBy = null, bool isAscending = true, int pageIndex = 1, int pageSize = 10)
         {
-            var orders = await jCEcommerceDbContext.Orders.Include(o => o.User).Include(o => o.Status)
-                .Include(o => o.OrderItems).ThenInclude(oi => oi.Product).ToListAsync();
+            var query = jCEcommerceDbContext.Orders
+                .Include(o => o.User)
+                .Include(o => o.Status)
+                .Include(o => o.OrderItems).ThenInclude(oi => oi.Product)
+                .AsQueryable();
 
-            return orders;
+            // Filtering
+            if (!string.IsNullOrWhiteSpace(filterOn) && !string.IsNullOrWhiteSpace(filterQuery))
+            {
+                if (filterOn.Equals("CustomerName", StringComparison.OrdinalIgnoreCase))
+                {
+                    query = query.Where(o => o.User.FullName.ToLower().Contains(filterQuery.ToLower()));
+                }
+                else if (filterOn.Equals("Status", StringComparison.OrdinalIgnoreCase))
+                {
+                    query = query.Where(o => o.Status.Name.ToLower().Contains(filterQuery.ToLower()));
+                }
+            }
+
+            var totalItems = await jCEcommerceDbContext.Orders.CountAsync();
+            var filteredItems = await query.CountAsync();
+
+            // Sorting
+            if (!string.IsNullOrWhiteSpace(sortBy))
+            {
+                query = sortBy.ToLower() switch
+                {
+                    "date" => isAscending ? query.OrderBy(o => o.OrderDate) : query.OrderByDescending(o => o.OrderDate),
+                    "total" => isAscending ? query.OrderBy(o => o.TotalAmount) : query.OrderByDescending(o => o.TotalAmount),
+                    _ => query
+                };
+            }
+
+            var skip = (pageIndex - 1) * pageSize;
+            var orders = await query.Skip(skip).Take(pageSize).ToListAsync();
+
+            return new PagedResult<Order>
+            {
+                Items = orders,
+                TotalItems = totalItems,
+                FilteredItems = filteredItems,
+                PageIndex = pageIndex,
+                PageSize = pageSize,
+                TotalPages = (int)Math.Ceiling(filteredItems / (double)pageSize),
+                BeginIndex = skip + 1,
+                EndIndex = skip + orders.Count,
+                ReturnedItems = orders.Count
+            };
         }
 
         public async Task<List<OrderStatus>> GetAllOrderStatusesAsync()
@@ -97,12 +142,54 @@ namespace JC_Ecommerce.Repositories
             return order;
         }
 
-        public async Task<List<Order>> GetOrdersByUserIdAsync(Guid userId)
+        public async Task<PagedResult<Order>> GetOrdersByUserIdAsync(Guid userId, string? filterOn = null, string? filterQuery = null,
+            string? sortBy = null, bool isAscending = true, int pageIndex = 1, int pageSize = 1000)
         {
-            var orders =  await jCEcommerceDbContext.Orders.Where(o => o.UserId == userId).Include(o => o.Status)
-                .Include(o => o.OrderItems).ThenInclude(oi => oi.Product).ToListAsync();
+            var query = jCEcommerceDbContext.Orders
+                .Where(o => o.UserId == userId)
+                .Include(o => o.Status)
+                .Include(o => o.OrderItems).ThenInclude(oi => oi.Product)
+                .Include(o => o.User)
+                .AsQueryable();
 
-            return orders;
+            // Filtering
+            if (!string.IsNullOrWhiteSpace(filterOn) && !string.IsNullOrWhiteSpace(filterQuery))
+            {
+                if (filterOn.Equals("Status", StringComparison.OrdinalIgnoreCase))
+                {
+                    query = query.Where(o => o.Status.Name.ToLower().Contains(filterQuery.ToLower()));
+                }
+            }
+
+            var totalItems = await jCEcommerceDbContext.Orders.CountAsync();
+            var filteredItems = await query.CountAsync();
+
+            // Sorting
+            if (!string.IsNullOrWhiteSpace(sortBy))
+            {
+                query = sortBy.ToLower() switch
+                {
+                    "date" => isAscending ? query.OrderBy(o => o.OrderDate) : query.OrderByDescending(o => o.OrderDate),
+                    "total" => isAscending ? query.OrderBy(o => o.TotalAmount) : query.OrderByDescending(o => o.TotalAmount),
+                    _ => query
+                };
+            }
+
+            var skip = (pageIndex - 1) * pageSize;
+            var orders = await query.Skip(skip).Take(pageSize).ToListAsync();
+
+            return new PagedResult<Order>
+            {
+                Items = orders,
+                TotalItems = totalItems,
+                FilteredItems = filteredItems,
+                PageIndex = pageIndex,
+                PageSize = pageSize,
+                TotalPages = (int)Math.Ceiling(filteredItems / (double)pageSize),
+                BeginIndex = skip + 1,
+                EndIndex = skip + orders.Count,
+                ReturnedItems = orders.Count
+            };
         }
 
         public async Task<bool> UpdateOrderStatusAsync(Guid orderId, Guid statusId)
