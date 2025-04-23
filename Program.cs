@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Add CORS policy
-builder.Services.AddCors(options =>
+/*builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowLocalhost5173",
         builder =>
@@ -22,7 +22,32 @@ builder.Services.AddCors(options =>
                    .AllowAnyMethod()
                    .AllowCredentials();
         });
+});*/
+
+builder.Services.AddCors(options =>
+{
+    if (builder.Environment.IsDevelopment())
+    {
+        options.AddPolicy("DefaultCorsPolicy", policy =>
+        {
+            policy.WithOrigins("http://localhost:5173")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials();
+        });
+    }
+    else
+    {
+        options.AddPolicy("DefaultCorsPolicy", policy =>
+        {
+            policy.WithOrigins("http://localhost:5173", "https://localhost:5173", "https://edspacesolutions.azurewebsites.net")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+    }
 });
+
+
 
 //Add swagger
 builder.Services.AddSwaggerGen(options =>
@@ -97,7 +122,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -108,7 +133,8 @@ app.UseHttpsRedirection();
 
 
 // Use CORS
-app.UseCors("AllowLocalhost5173");
+app.UseCors("DefaultCorsPolicy");
+//app.UseCors("AllowLocalhost5173");
 
 app.UseAuthentication();
 

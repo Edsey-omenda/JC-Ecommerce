@@ -1,0 +1,21 @@
+# Base runtime
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+WORKDIR /app
+EXPOSE 80
+
+# Build environment
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+COPY ["JC Ecommerce/JC Ecommerce.csproj", "JC Ecommerce/"]
+RUN dotnet restore "JC Ecommerce/JC Ecommerce.csproj"
+
+COPY . .
+WORKDIR "/src/JC Ecommerce"
+RUN dotnet publish "JC Ecommerce.csproj" -c Release -o /app/publish
+
+# Final stage
+FROM base AS final
+WORKDIR /app
+COPY --from=build /app/publish .
+ENTRYPOINT ["dotnet", "JC Ecommerce.dll"]

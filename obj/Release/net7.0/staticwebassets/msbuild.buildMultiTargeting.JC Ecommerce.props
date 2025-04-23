@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\JC Ecommerce.props" />
+</Project>
