@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <History>True|2025-04-24T13:04:19.1830710Z||;False|2025-04-24T16:02:38.8008654+03:00||;False|2025-04-24T16:02:00.9926874+03:00||;True|2025-04-24T15:30:19.5706400+03:00||;False|2025-04-24T15:02:37.3707839+03:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <AzureDBConnectionStrings Include="Data Source=sqlserver-jcommerce-dev-001.database.windows.net,1433;Initial Catalog=sqldb-jcommerce-dev-001;Authentication=ActiveDirectoryManagedIdentity" />
+    <AzureDBConnectionStrings Include="REDACTED" />
+    <AzureDBConnectionStrings Include="Server=tcp:sqlserver-jcommerce-dev-001.database.windows.net;Authentication=Active Directory Default;Database=sqldb-jcommerce-dev-001" />
+  </ItemGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="JCEcommerceConnectionString">
+      <Value>Server=tcp:sqlserver-jcommerce-dev-001.database.windows.net,1433%3bInitial Catalog=sqldb-jcommerce-dev-001%3bPersist Security Info=False%3bUser ID=jcommerce%3bPassword=Omenda2021%3bMultipleActiveResultSets=False%3bEncrypt=True%3bTrustServerCertificate=False%3bConnection Timeout=30%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="JC_Ecommerce.Data.JCEcommerceDbContext">
+      <Value>Server=tcp:sqlserver-jcommerce-dev-001.database.windows.net,1433%3bInitial Catalog=sqldb-jcommerce-dev-001%3bPersist Security Info=False%3bUser ID=jcommerce%3bPassword=Omenda2021%3bMultipleActiveResultSets=False%3bEncrypt=True%3bTrustServerCertificate=False%3bConnection Timeout=30%3b</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

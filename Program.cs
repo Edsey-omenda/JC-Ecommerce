@@ -12,42 +12,21 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Add CORS policy
-/*builder.Services.AddCors(options =>
+builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowLocalhost5173",
+    options.AddPolicy("AllowFrontend",
         builder =>
         {
-            builder.WithOrigins("http://localhost:5173", "https://localhost:5173")
+            builder.WithOrigins(
+                "http://localhost:5173",
+                "https://localhost:5173",
+                "https://edcomm-app.vercel.app"
+            )
                    .AllowAnyHeader()
                    .AllowAnyMethod()
                    .AllowCredentials();
         });
-});*/
-
-builder.Services.AddCors(options =>
-{
-    if (builder.Environment.IsDevelopment())
-    {
-        options.AddPolicy("DefaultCorsPolicy", policy =>
-        {
-            policy.WithOrigins("http://localhost:5173")
-                  .AllowAnyHeader()
-                  .AllowAnyMethod()
-                  .AllowCredentials();
-        });
-    }
-    else
-    {
-        options.AddPolicy("DefaultCorsPolicy", policy =>
-        {
-            policy.WithOrigins("http://localhost:5173", "https://localhost:5173", "https://edspacesolutions.azurewebsites.net")
-                  .AllowAnyHeader()
-                  .AllowAnyMethod();
-        });
-    }
 });
-
-
 
 //Add swagger
 builder.Services.AddSwaggerGen(options =>
@@ -133,8 +112,7 @@ app.UseHttpsRedirection();
 
 
 // Use CORS
-app.UseCors("DefaultCorsPolicy");
-//app.UseCors("AllowLocalhost5173");
+app.UseCors("AllowFrontend");
 
 app.UseAuthentication();
 

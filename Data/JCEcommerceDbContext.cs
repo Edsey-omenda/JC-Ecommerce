@@ -1,5 +1,6 @@
 ﻿using JC_Ecommerce.Models.Domain;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace JC_Ecommerce.Data
 {
@@ -80,19 +81,39 @@ namespace JC_Ecommerce.Data
                 .Property(o => o.TotalAmount)
                 .HasPrecision(18, 2);
 
+            var stringListComparer = new ValueComparer<List<string>>(
+                (c1, c2) => c1.SequenceEqual(c2),
+                c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
+                c => c.ToList()
+            );
+
             modelBuilder.Entity<Product>()
-              .Property(p => p.Color)
-              .HasConversion(
-                  v => string.Join(',', v),
-                  v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList()
-              );
+                .Property(p => p.Color)
+                .HasConversion(
+                    v => string.Join(',', v),
+                    v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList())
+                .Metadata.SetValueComparer(stringListComparer);
 
             modelBuilder.Entity<Product>()
                 .Property(p => p.Size)
                 .HasConversion(
                     v => string.Join(',', v),
+                    v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList())
+                .Metadata.SetValueComparer(stringListComparer);
+
+            /*modelBuilder.Entity<Product>()
+              .Property(p => p.Color)
+              .HasConversion(
+                  v => string.Join(',', v),
+                  v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList()
+              );*/
+
+            /*modelBuilder.Entity<Product>()
+                .Property(p => p.Size)
+                .HasConversion(
+                    v => string.Join(',', v),
                     v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList()
-                );
+                );*/
 
             //Seed data for Order Status
             //Easy, Medium, Hard

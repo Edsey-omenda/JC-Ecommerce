@@ -17,7 +17,7 @@ namespace JC_Ecommerce.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.17")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -47,7 +47,7 @@ namespace JC_Ecommerce.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("JC_Ecommerce.Models.Domain.OrderItem", b =>
@@ -75,7 +75,7 @@ namespace JC_Ecommerce.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItems", (string)null);
                 });
 
             modelBuilder.Entity("JC_Ecommerce.Models.Domain.OrderStatus", b =>
@@ -94,7 +94,7 @@ namespace JC_Ecommerce.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OrderStatuses");
+                    b.ToTable("OrderStatuses", (string)null);
 
                     b.HasData(
                         new
@@ -176,7 +176,7 @@ namespace JC_Ecommerce.Migrations
 
                     b.HasKey("ProductId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("JC_Ecommerce.Models.Domain.Role", b =>
@@ -191,7 +191,7 @@ namespace JC_Ecommerce.Migrations
 
                     b.HasKey("RoleId");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Roles", (string)null);
 
                     b.HasData(
                         new
@@ -235,7 +235,7 @@ namespace JC_Ecommerce.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("JC_Ecommerce.Models.Domain.UserRole", b =>
@@ -250,7 +250,7 @@ namespace JC_Ecommerce.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("UserRoles");
+                    b.ToTable("UserRoles", (string)null);
                 });
 
             modelBuilder.Entity("JC_Ecommerce.Models.Domain.Order", b =>
