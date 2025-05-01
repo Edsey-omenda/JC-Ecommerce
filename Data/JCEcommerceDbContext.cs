@@ -25,6 +25,8 @@ namespace JC_Ecommerce.Data
 
         public DbSet<UserRole> UserRoles { get; set; }
 
+        public DbSet<MpesaPayment> MpesaPayments { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -100,6 +102,11 @@ namespace JC_Ecommerce.Data
                     v => string.Join(',', v),
                     v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList())
                 .Metadata.SetValueComparer(stringListComparer);
+
+            //Mpesa Intergration
+            modelBuilder.Entity<MpesaPayment>()
+                .Property(p => p.Amount)
+                .HasPrecision(18, 2);
 
             /*modelBuilder.Entity<Product>()
               .Property(p => p.Color)
